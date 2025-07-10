@@ -1,0 +1,58 @@
+-- 假设这些服务和模块已经在已有代码中被引入
+local UserInputService = game:GetService("UserInputService")
+local Creator = require(Root.Creator)
+local New = Creator.New
+
+-- 定义图标相关变量
+local Icon = {}
+local Dragging = false
+local DragInput
+local MousePos
+local StartPos
+
+-- 创建图标
+function Icon:Create()
+    local IconFrame = New("ImageLabel", {
+        Image = "大学 V 图标的 asset ID", -- 替换为实际的图标 asset ID
+        Size = UDim2.fromOffset(50, 50), -- 图标大小
+        Position = UDim2.fromOffset(100, 100), -- 初始位置
+        BackgroundTransparency = 1,
+        Parent = game:GetService("Players").LocalPlayer.PlayerGui -- 图标父级，可根据实际情况修改
+    }, {
+        New("UICorner", {
+            CornerRadius = UDim.new(0, 5)
+        })
+    })
+
+    -- 监听鼠标按下事件，开始拖动
+    Creator.AddSignal(IconFrame.InputBegan, function(Input)
+        if Input.UserInputType == Enum.UserInputType.MouseButton1 then
+            Dragging = true
+            MousePos = Input.Position
+            StartPos = IconFrame.Position
+            Input.Changed:Connect(function()
+                if Input.UserInputState == Enum.UserInputState.End then
+                    Dragging = false
+                end
+            end)
+        end
+    end)
+
+    -- 监听鼠标移动事件，更新图标位置
+    Creator.AddSignal(UserInputService.InputChanged, function(Input)
+        if Input.UserInputType == Enum.UserInputType.MouseMovement and Dragging then
+            local Delta = Input.Position - MousePos
+            IconFrame.Position = UDim2.fromOffset(StartPos.X.Offset + Delta.X, StartPos.Y.Offset + Delta.Y)
+        end
+    end)
+
+    -- 监听图标点击事件，点击后打印“正确”
+    Creator.AddSignal(IconFrame.MouseButton1Click, function()
+        print("正确")
+    end)
+
+    return IconFrame
+end
+
+-- 创建图标实例
+local universityVIcon = Icon:Create()
