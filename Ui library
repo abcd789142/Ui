@@ -768,7 +768,7 @@ function e:CreateLibrary(G, H)
 							BackgroundColor3 = Color3.fromRGB(103, 0, 0)
 						}):Play()
 						ag.Title.Text = "Something failed on our end"
-						print("[BetterBypasser]: An error occurred: " .. tostring(a9))
+						print("[Su_D]: An error occurred: " .. tostring(a9))
 						task.wait(0.5)
 						ag.Title.Text = ae.Name
 						q:Create(ag, e.Theme.Dark.TweenInfo, {
