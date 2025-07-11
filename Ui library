@@ -499,7 +499,7 @@ function e:CreateLibrary(G, H)
 							BackgroundColor3 = Color3.fromRGB(103, 0, 0)
 						}):Play()
 						a7.Title.Text = "Something failed on our end"
-						print("[BetterBypasser]: An error occurred: " .. tostring(a9))
+						print("[Su_D]: An error occurred: " .. tostring(a9))
 						task.wait(0.5)
 						a7.Title.Text = a5.Name
 						q:Create(a7, e.Theme.Dark.TweenInfo, {
@@ -551,10 +551,10 @@ function e:CreateLibrary(G, H)
 				Premade.Title.Text = a5.Name or "Undefined"
 
 
-				if isfile("BetterBypasser/Configurations/PinnedPremades.json") then
+				if isfile("Su_D/Configurations/PinnedPremades.json") then
 					local Content
 					local Success, Error = pcall(function()
-						Content = r:JSONDecode(readfile("BetterBypasser/Configurations/PinnedPremades.json"))
+						Content = r:JSONDecode(readfile("Su_D/Configurations/PinnedPremades.json"))
 					end)
 
 					if Success and Content then
